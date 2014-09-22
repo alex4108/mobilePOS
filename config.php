@@ -7,10 +7,10 @@ if ($_SERVER['REMOTE_ADDR'] != "localhost" && $_SERVER['REMOTE_ADDR'] != "127.0.
 function mysqlInit() { // MySQL connection
 	
 // Modify these for database connection
-		$db['location'] = "127.0.0.1";
+		$db['location'] = "localhost";
 		$db['user'] = "root";
-		$db['pass'] = "MyNewPass";
-		$db['database'] = "customerLoyalty";
+		$db['pass'] = "";
+		$db['database'] = "mobilepos";
 /* DO NOT TOUCH ANYTHING PAST THIS LINE OR YOU WILL BREAK THE SCRIPT! */
 	
 	$mysqli = new mysqli($db['location'], $db['user'], $db['pass'], $db['database']);
