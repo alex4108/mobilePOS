@@ -213,9 +213,6 @@ class cronDeploy
 	 */
 	private function doGitCheckout ()
 	{
-		// Look for the request file. If none is present exit immediately
-		if (!file_exists(__DIR__.$this->dataFile)) exit;
-		
 		// Now assuming we have found the file, perform the Git checkout
 		exec("cd {$this->repo_dir} && {$this->git_path} fetch 2>&1", $op1);
 		exec("cd {$this->repo_dir} && GIT_WORK_TREE={$this->root_dir} {$this->git_path} checkout -f 2>&1", $op2);
