@@ -103,10 +103,7 @@ class cronDeploy
 	 * Determines methods to call etc
 	 */
 	public function deploy ()
-	{
-		// If we are called by the web server, just check for an update and write a flag file
-		if (!isset($_SERVER['argv']))
-		{
+	{          
 			// Get and decode the JSON request data
 			$this->getRequestData();
 			
@@ -114,14 +111,8 @@ class cronDeploy
 			$this->checkUpdate();
 			
 			// If we need to update, write a data file as a flag
-			$this->writeDataFile();
-		}
-		// Otherwise, we are called by cron using the user account permissions. If the flag file
-		// is present, run the git checkout
-		else
-		{
-			$this->doGitCheckout();
-		}
+			$this->doGitCheckout(); 
+		
 	}
 	
 	
