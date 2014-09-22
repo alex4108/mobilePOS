@@ -231,10 +231,10 @@ class cronDeploy
 	
         
 	    $ts = date('y-m-d.m-i-s');
-        file_put_contents( 'deploy-' . $ts . '.log', '\nDeployment Report\n\n' );
-        file_put_contents( 'deploy-' . $ts . '.log', $op1, FILE_APPEND);
-        file_put_contents( 'deploy-' . $ts . '.log', "\n\n", FILE_APPEND);
-        file_put_contents( 'deploy-' . $ts . '.log', $op2, FILE_APPEND);
+        file_put_contents( $this->root_dir . '/deploy/deploy-' . $ts . '.log', '\nDeployment Report\n\n' );
+        file_put_contents( $this->root_dir . '/deploy/deploy-' . $ts . '.log', $op1, FILE_APPEND);
+        file_put_contents( $this->root_dir . '/deploy/deploy-' . $ts . '.log', "\n\n", FILE_APPEND);
+        file_put_contents( $this->root_dir . '/deploy/deploy-' . $ts . '.log', $op2, FILE_APPEND);
         
         
 		
