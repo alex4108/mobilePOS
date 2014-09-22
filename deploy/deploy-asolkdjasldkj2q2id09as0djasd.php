@@ -20,6 +20,7 @@
 
 // Include the class
 include('class.bitbucket-cron-deploy.php');
+include('config.php');
 
 // Where you have put your DETACHED HEAD repository
 $repo_path = '/home/alex/mobilePOS_dev/mobilepos.git';
