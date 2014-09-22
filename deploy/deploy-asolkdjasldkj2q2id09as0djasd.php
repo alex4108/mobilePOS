@@ -44,6 +44,7 @@ $myDeploy = new cronDeploy();
 $myDeploy->setRepoPath($repo_path); 
 $myDeploy->setRootPath($root_path); 
 $myDeploy->setGitBranch($git_branch); 
+$myDeploy->setGitPath($git_path);
 
 // Run the deployment
 $myDeploy->deploy();
