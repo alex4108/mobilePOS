@@ -1,5 +1,4 @@
-<?php            
-// DEP TEST  
+<?php        
 /** 
  * Git Deployment Script for BitBucket
  *
