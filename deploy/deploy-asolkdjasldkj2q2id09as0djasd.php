@@ -26,7 +26,7 @@ include('class.bitbucket-cron-deploy.php');
 $repo_path = '/home/alex/mobilePOS/mobilepos.git';
 
 // Where you want to deploy the files to
-$root_path = '/home/alex/public_html';
+$root_path = '/home/alex/public_html/www.mobilepos.tk';
 
 // The name of the branch to deploy.
 $git_branch = 'master';
