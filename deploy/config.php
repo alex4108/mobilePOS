@@ -1,5 +1,7 @@
 <?php
-    
+
+// I'm changing the config!
+
 // Where you have put your DETACHED HEAD repository
 $repo_path = '/home/alex/mobilePOS_dev/mobilepos.git';
 
