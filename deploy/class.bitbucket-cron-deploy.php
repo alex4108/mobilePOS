@@ -229,6 +229,7 @@ class cronDeploy
         file_put_contents( $this->root_dir . '/deploy/logs/deploy-' . $ts . '.log', $op2, FILE_APPEND);
         
         // Return config to original state
+        exec("rm -rf " . $this->root_dir . 'deploy/config.php');
         file_put_contents( $this->root_dir . 'deploy/config.php', $config );
         
         exec("chmod -R 755 ".$this->root_dir);
