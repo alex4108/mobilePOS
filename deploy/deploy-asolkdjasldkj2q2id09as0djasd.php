@@ -4,7 +4,7 @@ $repo_dir = '/home/alex/mobilePOS/mobilePOS.git';
 $web_root_dir = '/home/alex/mobilePOS/www';
 
 // Full path to git binary is required if git is not in your PHP user's path. Otherwise just use 'git'.
-$git_bin_path = '/usr/local/bin/git';
+$git_bin_path = '/usr/bin/git';
 
 $update = false;
 
