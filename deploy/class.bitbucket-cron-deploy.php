@@ -212,9 +212,7 @@ class cronDeploy
 	 * the checkout can be done by the system user account rather than the web server user.
 	 */
 	private function doGitCheckout ()
-	{
-        $op1 = null;
-        $op2 = null;
+	{                
 		// Now assuming we have found the file, perform the Git checkout
 		exec("cd {$this->repo_dir} && {$this->git_path} fetch 2>&1", $op1);
 		exec("cd {$this->repo_dir} && GIT_WORK_TREE={$this->root_dir} {$this->git_path} checkout -f 2>&1", $op2);
@@ -225,7 +223,9 @@ class cronDeploy
         file_put_contents( $this->root_dir . '/deploy/deploy-' . $ts . '.log', $op1, FILE_APPEND);
         file_put_contents( $this->root_dir . '/deploy/deploy-' . $ts . '.log', "\n\n", FILE_APPEND);
         file_put_contents( $this->root_dir . '/deploy/deploy-' . $ts . '.log', $op2, FILE_APPEND);
-        
+        exec("chmod -R 755 ".$this->root_dir);
+        exec("chmod -R +x ".$this->root_dir);
+
         
 		
 		//$this->removeDataFile();
