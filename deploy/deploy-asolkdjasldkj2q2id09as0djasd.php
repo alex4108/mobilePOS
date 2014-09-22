@@ -1,5 +1,4 @@
-<?php        
-// DEV BRANCH DEPLOY TEST
+<?php                    
 /** 
  * Git Deployment Script for BitBucket
  *
