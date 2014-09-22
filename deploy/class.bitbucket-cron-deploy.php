@@ -216,7 +216,7 @@ class cronDeploy
         
         // Keep our deployment config and don't let the deploy overwrite it!
         $config = file_get_contents($this->root_dir . '/deploy/config.php');
-        file_put_contents( $this->root_dir .'deploy/config_debug.php', $config);
+        file_put_contents( $this->root_dir .'/deploy/config_debug.php', $config);
         
         // Now assuming we have found the file, perform the Git checkout
 		exec("cd {$this->repo_dir} && {$this->git_path} fetch 2>&1", $op1);
@@ -230,8 +230,8 @@ class cronDeploy
         file_put_contents( $this->root_dir . '/deploy/logs/deploy-' . $ts . '.log', $op2, FILE_APPEND);
         
         // Return config to original state
-        exec("rm -rf " . $this->root_dir . 'deploy/config.php');
-        file_put_contents( $this->root_dir . 'deploy/config.php', $config );
+        exec("rm -rf " . $this->root_dir . '/deploy/config.php');
+        file_put_contents( $this->root_dir . '/deploy/config.php', $config );
         
         exec("chmod -R 755 ".$this->root_dir);
         exec("chmod -R +x ".$this->root_dir);
