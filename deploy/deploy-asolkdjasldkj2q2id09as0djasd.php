@@ -1,5 +1,4 @@
-<?php
-// DEPLOY TEST 9000
+<?php              
 /** 
  * Git Deployment Script for BitBucket
  *
