@@ -213,7 +213,10 @@ class cronDeploy
 	 */
 	private function doGitCheckout ()
 	{                
-		// Now assuming we have found the file, perform the Git checkout
+        // Keep our deployment config and don't let the deploy overwrite it!
+        exec('cp ' . $this->root_dir . '/deploy/config.php /tmp/deployconfig.php');
+        
+        // Now assuming we have found the file, perform the Git checkout
 		exec("cd {$this->repo_dir} && {$this->git_path} fetch 2>&1", $op1);
 		exec("cd {$this->repo_dir} && GIT_WORK_TREE={$this->root_dir} {$this->git_path} checkout -f 2>&1", $op2);
 	
@@ -223,6 +226,10 @@ class cronDeploy
         file_put_contents( $this->root_dir . '/deploy/logs/deploy-' . $ts . '.log', $op1, FILE_APPEND);
         file_put_contents( $this->root_dir . '/deploy/logs/deploy-' . $ts . '.log', "\n\n", FILE_APPEND);
         file_put_contents( $this->root_dir . '/deploy/logs/deploy-' . $ts . '.log', $op2, FILE_APPEND);
+        
+        // Return config to original state
+        exec('cp /tmp/deployconfig.php ' . $this->root_dir . '/deploy/config.php');   
+        
         exec("chmod -R 755 ".$this->root_dir);
         exec("chmod -R +x ".$this->root_dir);
 
