@@ -1,4 +1,5 @@
 <?php
+// Deploy Test
 file_put_contents('deploy.log', serialize($_POST['payload']), FILE_APPEND);
 $repo_dir = '/home/alex/mobilePOS/mobilePOS.git';
 $web_root_dir = '/home/alex/mobilePOS/www';
