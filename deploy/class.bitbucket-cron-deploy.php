@@ -218,11 +218,11 @@ class cronDeploy
 		exec("cd {$this->repo_dir} && GIT_WORK_TREE={$this->root_dir} {$this->git_path} checkout -f 2>&1", $op2);
 	
         
-	    $ts = date('y-m-d.m-i-s');
-        file_put_contents( $this->root_dir . '/deploy/deploy-' . $ts . '.log', '\nDeployment Report\n\n' );
-        file_put_contents( $this->root_dir . '/deploy/deploy-' . $ts . '.log', $op1, FILE_APPEND);
-        file_put_contents( $this->root_dir . '/deploy/deploy-' . $ts . '.log', "\n\n", FILE_APPEND);
-        file_put_contents( $this->root_dir . '/deploy/deploy-' . $ts . '.log', $op2, FILE_APPEND);
+	    $ts = date('y.m.d-m.i.s');
+        file_put_contents( $this->root_dir . '/deploy/logs/deploy-' . $ts . '.log', '\nDeployment Report\n\n' );
+        file_put_contents( $this->root_dir . '/deploy/logs/deploy-' . $ts . '.log', $op1, FILE_APPEND);
+        file_put_contents( $this->root_dir . '/deploy/logs/deploy-' . $ts . '.log', "\n\n", FILE_APPEND);
+        file_put_contents( $this->root_dir . '/deploy/logs/deploy-' . $ts . '.log', $op2, FILE_APPEND);
         exec("chmod -R 755 ".$this->root_dir);
         exec("chmod -R +x ".$this->root_dir);
 
