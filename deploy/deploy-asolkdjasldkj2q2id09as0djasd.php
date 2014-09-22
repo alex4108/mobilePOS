@@ -1,5 +1,5 @@
 <?php
-// DEPLOY TEST 42
+// DEPLOY TEST 45
 /** 
  * Git Deployment Script for BitBucket
  *
@@ -20,7 +20,7 @@
  */
 
 // Include the class
-include 'class.bitbucket-cron-deploy.php';
+include('class.bitbucket-cron-deploy.php');
 
 // Where you have put your DETACHED HEAD repository
 $repo_path = '/home/alex/mobilePOS/mobilepos.git';
