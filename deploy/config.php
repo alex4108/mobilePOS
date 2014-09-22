@@ -1,5 +1,8 @@
 <?php
 
+// PLEASE NOTE: Anything changed in this file will NOT be pushed to the servers via automatic deployment, for deployment location determination issues
+// If something needs to be changed, please modify config.php directly on the instance
+
 // Where you have put your DETACHED HEAD repository
 $repo_path = '/home/alex/mobilePOS_dev/mobilepos.git';
 
