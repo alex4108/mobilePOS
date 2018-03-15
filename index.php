@@ -23,9 +23,9 @@ $settings['textMajor'] | Type: boolean | Desc: Send text message on major log ev
 global $settings;
 
 require( 'config.php' );
-
 $settings = loadSettings();
-$settings['config_location'] = '/var/www/html/config.php';
+$_HOST = setHostPath();
+print_r('HOST' . $_HOST);
 require( 'sessionCheck.php' );
 
 /**
@@ -71,7 +71,7 @@ if (array_key_exists('action', $_GET)) {
 			$row['data'] = serialize($data);
 			$query = "UPDATE log SET data = '" . $row['data'] . "' WHERE id = " . mysqli_real_escape_string($mysqli, $_GET['id']);
 			$mysqli->query($query);
-			header("Location: http://localhost/itrap/index.php#_transacList");
+			header("Location: " . $_HOST . "/index.php#_transacList");
 				
 	}
 	if ($_GET['action'] == "recvInventory") {
@@ -97,7 +97,7 @@ if (array_key_exists('action', $_GET)) {
 			$logData['inventory_cost'] = $v['cost'];
 			writeToLog('inventory', $logData);
 		}
-		header('Location: http://localhost/itrap/index.php#reportInventory');
+		header('Location: ' . $_HOST . '/index.php#reportInventory');
 	}
 }
 //die();
@@ -744,7 +744,7 @@ if (array_key_exists('action', $_POST)) {
 		$mysqli->query($query);
 			
 		$addProd['result'] = "Success";
-		header("Location: http://localhost/itrap/index.php#inventory");
+		header("Location: " . $_HOST . "/index.php#inventory");
 	}
 	elseif ($_POST['action'] == "cashdrop") {
 		if ($_SESSION['access'] < 2) {

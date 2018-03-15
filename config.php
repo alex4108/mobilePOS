@@ -1,6 +1,6 @@
 <?php
 
-$_HOST = "http://localhost/itrap";
+
 
 if ($_SERVER['REMOTE_ADDR'] != "localhost" && $_SERVER['REMOTE_ADDR'] != "127.0.0.1") {
 	//echo("hacking attempt");
@@ -8,14 +8,14 @@ if ($_SERVER['REMOTE_ADDR'] != "localhost" && $_SERVER['REMOTE_ADDR'] != "127.0.
 	//die();
 }
 function mysqlInit() { // MySQL connection
-	
+
 // Modify these for database connection
 		$db['location'] = "localhost";
 		$db['user'] = "root";
 		$db['pass'] = "";
 		$db['database'] = "itrap";
 /* DO NOT TOUCH ANYTHING PAST THIS LINE OR YOU WILL BREAK THE SCRIPT! */
-	
+
 	$mysqli = new mysqli($db['location'], $db['user'], $db['pass'], $db['database']);
 	if (mysqli_connect_errno()) {
 		printf("Connect failed: %s\n", mysqli_connect_error());
@@ -27,7 +27,7 @@ function mysqlInit() { // MySQL connection
 	$mysqli = null;
 }
 function loadSettings() { // Script settings
-	
+
 	// Load website settings
 	$mysqli = mysqlInit();
 	$query = "SELECT * FROM settings";
@@ -45,31 +45,31 @@ function loadSettings() { // Script settings
 }
 function sendSMS($msg, $number = null) { // Send SMS (only for ($settings['biteSMS']))
 	//global $settings;
-	//if ($number == null) 
+	//if ($number == null)
 		//$number = $settings['logNumber'];
-		
+
 	//$exec = 'sudo /Applications/biteSMS.app/biteSMS -send -carrier "' . $number . '" "' . $msg . ' "';
 	//echo $exec;
 	//exec($exec);
 	//writeToLog(0, "Sent SMS to " . $number . " | " . $msg . "");
-	
+
 }
 /*
 	Write To Log
-	
+
 	@param string flag Type of log (cash, inventory, transaction, data mod, sign in, sign out)
 	@param string data Array of data consistent with flag
-	
+
 	@return boolean True on success, False on failure
-	
+
 */
 function writeToLog($flag, $data) {
 	require("sessionCheck.php");
 	global $settings;
 	$mysqli = mysqlInit();
-	
+
 	$data = serialize($data);
-	
+
 	$query = "INSERT INTO log (flag, data, timestamp, admin) VALUES ('" . $flag . "', '" . $data . "', '" . time() ."', '" . $_SESSION['it_user'] . "')";
 	if (!$result = mysqli_query($mysqli, $query)) {
 		die("Query Error (" . $query . "): " . mysqli_error($mysqli));
@@ -77,12 +77,12 @@ function writeToLog($flag, $data) {
 	return true;
 }
 /*
-	Get Log	
-	
+	Get Log
+
 	@param string flag
 	@param string startStamp
 	@param string endStamp
-	
+
 	@return array Log data
 */
 function getLog($flag, $startStamp, $endStamp) {
@@ -99,7 +99,7 @@ function getLog($flag, $startStamp, $endStamp) {
 }
 function nameToID($name) {
 	$mysqli = mysqlInit();
-	
+
 	$query = "SELECT id FROM customers WHERE userid = '" . $mysqli->real_escape_string($name) . "'";
 	if (!$result = mysqli_query($mysqli, $query)) {
 			die("Query Error (" . $query . "): " . mysqli_error($mysqli));
@@ -107,12 +107,12 @@ function nameToID($name) {
 	while ($row = mysqli_fetch_assoc($result)) {
 		return $row['id'];
 	}
-	
+
 }
 
 function idToName($id) {
 	$mysqli = mysqlInit();
-		
+
 		$query = "SELECT userid FROM customers WHERE id = '" . $mysqli->real_escape_string($id) . "'";
 		if (!$result = mysqli_query($mysqli, $query)) {
 				die("Query Error (" . $query . "): " . mysqli_error($mysqli));
@@ -120,6 +120,20 @@ function idToName($id) {
 		while ($row = mysqli_fetch_assoc($result)) {
 			return $row['userid'];
 		}
-		
+
 }
+function setHostPath() {
+	$mysqli = mysqlInit();
+	// Retrieve host path from DB
+
+	$query = "SELECT value FROM settings WHERE setting = 'path'";
+	if (!$result = mysqli_query($mysqli, $query)) {
+		die("Query Error (" . $query . "): " . mysqli_error($mysqli));
+	}
+	while ($row = mysqli_fetch_assoc($result)) {
+		return $row['value'];
+	}
+}
+
+
 ?>

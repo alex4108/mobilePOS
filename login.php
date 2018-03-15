@@ -21,24 +21,24 @@
 		include("config.php");
 		$mysqli = mysqlInit();
 		$query = "SELECT * FROM users WHERE username = '" . $mysqli->real_escape_string($_POST['username']) . "' AND password = '" . $mysqli->real_escape_string(md5($_POST['password'])) . "'";
-	
+
 		if (!$result = mysqli_query($mysqli, $query)) {
         	        die("Query Error (" . $query . "): " . mysqli_error($mysqli));
 	        }
 
         	$row = mysqli_fetch_assoc($result);
-		
-		
+
+
 
 		if ($row['access'] == "1" || $row['access'] == "2") {
-		
+
 			$_SESSION['it_user'] = $_POST['username'];
 			$_SESSION['access'] = intval($row['access']);
 			$_SESSION['expire'] = (time()+120);
 			//print_r("TIME: " . time());
 			//print_r("EXPIRE: " . $_SESSION['expire']);
 			$m = "Signed in";
-			header("Location: http://localhost/itrap/index.php");
+			header("Location: " . $_HOST . "/index.php");
 		}
 		else {
 			$m = "Invalid username or password.";
