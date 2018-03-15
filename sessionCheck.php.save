@@ -1,0 +1,18 @@
+<?php
+session_start();
+
+
+
+if ($_SESSION['it_user'] == null) { // No Session 
+	header("Location: http://10.0.1.17/login.php");
+}
+
+if ($_SESSION['expire'] > time()) { // Valid session
+	$_SESSION['expire'] = (time()+120);
+}
+
+if ($_SESSION['expire'] < time()) { // Expired session (kill it)
+	header("Location: http://10.0.1.17/login.php?action=sign_out");
+}
+//print_r("Session expires at " . date("h:i:s", $_SESSION['expire']));
+
